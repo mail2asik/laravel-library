@@ -21,7 +21,6 @@ class CreateBooksTable extends Migration {
             $table->string('isbn', 20)->default('');
             $table->tinyInteger('quantity')->default(0);
             $table->string('shelf_location', 20)->default('');
-            $table->tinyInteger('no_of_books_available')->default(0);
             $table->tinyInteger('no_of_books_loan')->default(0);
 
             $table->timestamps();

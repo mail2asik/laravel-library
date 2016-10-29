@@ -10,8 +10,7 @@
 @section('content')
     <div class='row'>
         @include('admin.sections.flash-message')
-        <form id="create_user_form" role="form" method="post" action="{{ secure_url('/admin/doCreateUser') }}"
-              enctype="multipart/form-data">
+        <form id="create_user_form" role="form" method="post" action="{{ secure_url('/admin/doCreateUser') }}">
             <!-- form start -->
             <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
@@ -120,7 +119,6 @@
     <script>
         $(document).ready(function () {
 
-            // validate reset password form on key-up and submit
             var validator = $("#create_user_form").validate({
                 rules: {
                     first_name: {

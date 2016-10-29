@@ -43,6 +43,90 @@ class UserRepository
     }
 
     /**
+     * Get a user by uid
+     *
+     * @param $user_uid
+     *
+     * @return User
+     *
+     * @throws \Exception
+     */
+    public function getUserByUserUid($user_uid)
+    {
+        try {
+            $key    = 'getUserByUserUid' . $user_uid;
+            $expire = 30;
+
+            if (Cache::has($key)) {
+                return Cache::get($key);
+            }
+
+            $user = $this->getModel()->where('uid', $user_uid)->with('roles')->first();
+
+            if (empty($user)) {
+                throw new \Exception('User not found');
+            }
+
+            return $user;
+        } catch (\Exception $e) {
+            Log::error(__CLASS__ . ':' . __TRAIT__ . ':' . __FILE__ . ':' . __LINE__ . ':' . __FUNCTION__ . ':' .
+                'Unknown Exception thrown UserRepository@getUserByUserUid', [
+                'exception_type' => get_class($e),
+                'message'        => $e->getMessage(),
+                'code'           => $e->getCode(),
+                'line_no'        => $e->getLine(),
+                'params'         => func_get_args()
+            ]);
+
+            throw new \Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Get a user by api_key
+     *
+     * @param string $api_key
+     *
+     * @return User
+     *
+     * @throws \Exception
+     */
+    public function getUserByApiKey($api_key)
+    {
+        try {
+            $key    = __FUNCTION__ . $api_key;
+            $expire = 30;
+
+            if (Cache::has($key)) {
+                return Cache::get($key);
+            }
+
+            $user = User::whereHas('api', function ($k) use ($api_key) {
+                $k->where('api_key', $api_key);
+            })->first();
+
+            if (empty($user)) {
+                throw new \Exception('User not found');
+            }
+
+            Cache::put($key, $user, $expire);
+
+            return $user;
+        } catch (\Exception $e) {
+            Log::error(__CLASS__ . ':' . __TRAIT__ . ':' . __FILE__ . ':' . __LINE__ . ':' . __FUNCTION__ . ':' .
+                'Unknown Exception thrown UserRepository@getUserByApiKey', [
+                'exception_type' => get_class($e),
+                'message'        => $e->getMessage(),
+                'code'           => $e->getCode(),
+                'line_no'        => $e->getLine(),
+                'params'         => func_get_args()
+            ]);
+
+            throw new \Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
      * Registers a User
      *
      * @param array $params
@@ -69,12 +153,12 @@ class UserRepository
             ];
             $validator = \Validator::make($params, $requirements, $messages);
             if ($validator->fails()) {
-                throw new \Exception($validator->messages(), 40002001);
+                throw new \Exception($validator->messages());
             }
 
             // Check the role
             if (is_null($role = Sentinel::findRoleBySlug($params['role']))) {
-                throw new \Exception('No such role exists', 1000);
+                throw new \Exception('No such role exists');
             }
 
             // register a user
@@ -83,7 +167,7 @@ class UserRepository
                 'password' => $params['password']
             ];
             if (!$user = Sentinel::register($credentials)) {
-                throw new \Exception('Unknown error, failed to register user', 1000);
+                throw new \Exception('Unknown error, failed to register user');
             }
 
             //Create api
@@ -158,7 +242,7 @@ class UserRepository
             ];
             $validator = \Validator::make($params, $requirements);
             if ($validator->fails()) {
-                throw new \Exception($validator->messages(), 40002001);
+                throw new \Exception($validator->messages());
             }
 
             // Update email or password
@@ -194,108 +278,16 @@ class UserRepository
             }
 
             // Update
-            $params = [
-                'first_name'    => $params['first_name'],
-                'last_name'     => $params['last_name'],
-                'gender'        => $params['gender'],
-                'dob'           => Carbon::parse($params['dob'])->format('Y-m-d'),
-            ];
-            $this->getModel()->where('id', $user->id)->update($params);
+            $user->first_name   = $params['first_name'];
+            $user->last_name    = $params['last_name'];
+            $user->gender       = $params['gender'];
+            $user->dob          = Carbon::parse($params['dob'])->format('Y-m-d');
+            $user->update();
 
-
-            $user = $this->getModel()->find($user->id);
-
-            $user_info          = $user->toArray();
-            $user_info['auth']  = $user->api()->first()->toArray();
-            $user_info['role']  = $user->roles()->first()->toArray();
-
-            return $user_info;
+            return $user;
         } catch (\Exception $e) {
             Log::error(__CLASS__ . ':' . __TRAIT__ . ':' . __FILE__ . ':' . __LINE__ . ':' . __FUNCTION__ . ':' .
                 'Unknown Exception thrown UserRepository@update', [
-                'exception_type' => get_class($e),
-                'message'        => $e->getMessage(),
-                'code'           => $e->getCode(),
-                'line_no'        => $e->getLine(),
-                'params'         => func_get_args()
-            ]);
-
-            throw new \Exception($e->getMessage(), $e->getCode());
-        }
-    }
-
-    /**
-     * Get a user by uid
-     *
-     * @param $user_uid
-     *
-     * @return User
-     *
-     * @throws \Exception
-     */
-    public function getUserByUserUid($user_uid)
-    {
-        try {
-            $key    = 'getUserByUserUid' . $user_uid;
-            $expire = 30;
-
-            if (Cache::has($key)) {
-                return Cache::get($key);
-            }
-
-            $user = $this->getModel()->where('uid', $user_uid)->with('roles')->first();
-            if (empty($user)) {
-                throw new \Exception('User not found', 40008001);
-            }
-
-            return $user;
-        } catch (\Exception $e) {
-            Log::error(__CLASS__ . ':' . __TRAIT__ . ':' . __FILE__ . ':' . __LINE__ . ':' . __FUNCTION__ . ':' .
-                'Unknown Exception thrown UserRepository@getUserByUserUid', [
-                'exception_type' => get_class($e),
-                'message'        => $e->getMessage(),
-                'code'           => $e->getCode(),
-                'line_no'        => $e->getLine(),
-                'params'         => func_get_args()
-            ]);
-
-            throw new \Exception($e->getMessage(), $e->getCode());
-        }
-    }
-
-    /**
-     * Get a user by api_key
-     *
-     * @param string $api_key
-     *
-     * @return User
-     *
-     * @throws \Exception
-     */
-    public function getUserByApiKey($api_key)
-    {
-        try {
-            $key    = __FUNCTION__ . $api_key;
-            $expire = 30;
-
-            if (Cache::has($key)) {
-                return Cache::get($key);
-            }
-
-            $user = User::whereHas('api', function ($k) use ($api_key) {
-                $k->where('api_key', $api_key);
-            })->first();
-
-            if (empty($user)) {
-                throw new \Exception('User not found', 40008001);
-            }
-
-            Cache::put($key, $user, $expire);
-
-            return $user;
-        } catch (\Exception $e) {
-            Log::error(__CLASS__ . ':' . __TRAIT__ . ':' . __FILE__ . ':' . __LINE__ . ':' . __FUNCTION__ . ':' .
-                'Unknown Exception thrown UserRepository@getUserByApiKey', [
                 'exception_type' => get_class($e),
                 'message'        => $e->getMessage(),
                 'code'           => $e->getCode(),

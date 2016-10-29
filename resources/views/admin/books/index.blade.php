@@ -41,37 +41,37 @@
     </div><!-- /.row -->
     <script>
         // Get url
-        var getUsersPageURL = function(page, limit, search_by_keywords, role) {
-            var url =  '/admin/users?page='+ page +'&limit=' + limit + '&search_by_keywords=' + encodeURIComponent(search_by_keywords) ;
+        var getBooksPageURL = function(page, limit, search_by_keywords, role) {
+            var url =  '/admin/books?page='+ page +'&limit=' + limit + '&search_by_keywords=' + encodeURIComponent(search_by_keywords) ;
             return url;
         };
 
-        var url = getUsersPageURL('{{ $page }}', '{{ $limit }}', '{{ $search_by_keywords }}');
+        var url = getBooksPageURL('{{ $page }}', '{{ $limit }}', '{{ $search_by_keywords }}');
 
         $(document).ready(function () {
 
             // Pagination
             $(document).on('click', '.pagination a', function (e) {
                 url = $(this).attr('href');
-                addUsersPushState(url);
-                getUsersPage(url);
+                addBooksPushState(url);
+                getBooksPage(url);
                 e.preventDefault();
             });
 
             // Rows per page
             $(document).on('change', '#rowsPerPage', function (e) {
-                var updateUrl = getUsersPageURL(1, $('#rowsPerPage').val(), $('#search_by_keywords').val());
-                addUsersPushState(updateUrl);
-                getUsersPage(updateUrl);
+                var updateUrl = getBooksPageURL(1, $('#rowsPerPage').val(), $('#search_by_keywords').val());
+                addBooksPushState(updateUrl);
+                getBooksPage(updateUrl);
                 e.preventDefault();
             });
 
             // Search by keyword
             $(document).on('keyup', '#search_by_keywords', function (e) {
                 if(e.keyCode == 13) {
-                    var updateUrl = getUsersPageURL(1, $('#rowsPerPage').val(), $('#search_by_keywords').val());
-                    addUsersPushState(updateUrl);
-                    getUsersPage(updateUrl);
+                    var updateUrl = getBooksPageURL(1, $('#rowsPerPage').val(), $('#search_by_keywords').val());
+                    addBooksPushState(updateUrl);
+                    getBooksPage(updateUrl);
                     e.preventDefault();
                 }
             });
@@ -80,17 +80,17 @@
             $(window).on('popstate', function() {
                 if (history.state !== null) {
                     if (typeof(history.state.usersPageUrl) == 'string') {
-                        getUsersPage(history.state.usersPageUrl);
+                        getBooksPage(history.state.usersPageUrl);
                     }
                 } else {
-                    getUsersPage(url);
+                    getBooksPage(url);
                 }
             });
 
         });
 
         // Ajax request
-        var getUsersPage = function(url) {
+        var getBooksPage = function(url) {
             $('#ajaxLoader').removeClass('hide');
             $.get(url, function(data, status, xhr){
                 $('#ajaxLoader').addClass('hide');
@@ -106,10 +106,10 @@
         };
 
         // Add push state
-        var addUsersPushState = function(url){
-            window.history.pushState({usersPageUrl: url}, 'Users', url);
+        var addBooksPushState = function(url){
+            window.history.pushState({booksPageUrl: url}, 'Users', url);
         };
 
-        setTimeout(function() { getUsersPage(url); window.history.replaceState({usersPageUrl: url}, '', window.location.href); }, 100);
+        setTimeout(function() { getBooksPage(url); window.history.replaceState({booksPageUrl: url}, '', window.location.href); }, 100);
     </script>
 @endsection

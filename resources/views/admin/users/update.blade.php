@@ -113,7 +113,7 @@
                 'submit_button_label' => 'Submit',
                 'delete_button_label' => 'Delete',
                 'delete_action_url'   =>  secure_url('admin/users/delete/'. $user['uid'])
-        ])
+                ])
             </div>
         </form>
     </div>
@@ -121,7 +121,6 @@
     <script>
         $(document).ready(function () {
 
-            // validate reset password form on key-up and submit
             var validator = $("#update_user_form").validate({
                 rules: {
                     first_name: {

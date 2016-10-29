@@ -1,6 +1,6 @@
 <?php
 /**
- * User Controller class
+ * Book Controller class
  *
  * @author Asik
  * @email  mail2asik@gmal.com
@@ -15,28 +15,28 @@ use Illuminate\Support\Facades\Response;
 use helpers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Repositories\UserRepository;
+use App\Repositories\BookRepository;
 use Illuminate\View\View;
 
 /**
- * Class UserController
+ * Class BookController
  */
-class UserController extends Controller
+class BookController extends Controller
 {
     /**
      * Constructor
      *
-     * @param UserRepository    $user
+     * @param BookRepository    $book
      */
-    public function __construct(UserRepository $user)
+    public function __construct(BookRepository $book)
     {
         parent::__construct();
 
-        $this->user     = $user;
+        $this->book     = $book;
     }
 
     /**
-     * Get list of users
+     * Get list of books
      *
      * @param Request $request
      *
@@ -63,57 +63,57 @@ class UserController extends Controller
             }
 
             // Save the last page requested
-            $page_url = '/admin/users?page=' . $params['page'] . '&limit=' . $params['limit'] . '&search_by_keywords=' . urlencode($params['search_by_keywords']);
-            Session::put('page.users', url($page_url));
+            $page_url = '/admin/books?page=' . $params['page'] . '&limit=' . $params['limit'] . '&search_by_keywords=' . urlencode($params['search_by_keywords']);
+            Session::put('page.books', url($page_url));
 
             // If ajax request, return specific page response
             if ($request->ajax()) {
 
                 // Get response
-                $response = $this->getUsers($params);
+                $response = $this->getBooks($params);
 
                 return $response;
             }
 
-            // Render users page layout
-            $params['page_title'] = 'Members';
-            $params['page_name']  = 'members';
+            // Render books page layout
+            $params['page_title'] = 'Books';
+            $params['page_name']  = 'books';
 
-            return view('admin/users/index', $params);
+            return view('admin/books/index', $params);
         } catch (\Exception $e) {
             return Redirect::to(helpers::getNotFoundPageURL());
         }
     }
 
     /**
-     * Ajax: Get list of users
+     * Ajax: Get list of books
      *
      * @param array $params
      *
      * @return View
      */
-    public function getUsers($params)
+    public function getBooks($params)
     {
         try {
-            $users = $this->user->getAllUsers($params);
+            $books = $this->book->getAllBooks($params);
 
-            if (!empty($users['data'])) {
+            if (!empty($books['data'])) {
 
                 //Generate paginator using Laravel paginator class
-                $paginator          = new LengthAwarePaginator($users['data'], $users['total'], $users['per_page'],
-                    $params['page'], ['path' => '/admin/users']);
+                $paginator          = new LengthAwarePaginator($books['data'], $books['total'], $books['per_page'],
+                    $params['page'], ['path' => '/admin/books']);
                 $paginator          = $paginator->appends($params);
-                $users['paginator'] = $paginator;
+                $books['paginator'] = $paginator;
             }
 
-            return view('admin/users/list', $users);
+            return view('admin/books/list', $books);
         } catch (\Exception $e) {
             return Response::json(['error' => true]);
         }
     }
 
     /**
-     * Create user
+     * Create book
      *
      * @param $request
      *
@@ -121,37 +121,34 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        return view('admin/users/create', [
-            'page_title' => 'Add Member',
-            'page_name'  => 'add_member'
+        return view('admin/books/create', [
+            'page_title' => 'Add Book',
+            'page_name'  => 'add_book'
         ]);
     }
 
     /**
-     * Create a user (Submission)
+     * Create a book (Submission)
      *
      * @param Request $request
      *
      * @return Redirect
      */
-    public function doCreateUser(Request $request)
+    public function doCreateBook(Request $request)
     {
         try {
             // Parse out non param data from incoming request
             $params = $request->except('_url');
 
-            // We can reuse this controller for future for adding anothe role users
-            $params['role'] = 'member';
+            $result = $this->book->create($params);
 
-            $result = $this->user->create($params);
-
-            return Redirect::to('admin/users/create')->with('flash_message', [
+            return Redirect::to('admin/books/create')->with('flash_message', [
                 'status'  => 'success',
-                'message' => 'Member created successfully'
+                'message' => 'Book created successfully'
             ]);
         } catch (\Exception $e) {
             $error = helpers::errorMessage($e->getMessage());
-            return Redirect::to('admin/users/create')->withInput()->with('flash_message', [
+            return Redirect::to('admin/books/create')->withInput()->with('flash_message', [
                 'status'       => 'fail',
                 'code'         => $e->getCode(),
                 'message'      => $error['message'],
@@ -161,49 +158,46 @@ class UserController extends Controller
     }
 
     /**
-     * Update a user
+     * Update a book
      *
-     * @param string  $user_uid
+     * @param string  $book_uid
      *
      * @return View
      */
-    public function update($user_uid)
+    public function update($book_uid)
     {
-        $user = $this->user->getUserByUserUid($user_uid);
+        $book = $this->book->getBookByUid($book_uid);
 
-        return view('admin/users/update', [
-            'page_title' => 'Edit Member',
-            'page_name'  => 'edit_member',
-            'user'       => $user
+        return view('admin/books/update', [
+            'page_title' => 'Edit Book',
+            'page_name'  => 'edit_book',
+            'book'       => $book
         ]);
     }
 
     /**
-     * Update a user (Submission)
+     * Update a book (Submission)
      *
-     * @param string  $user_uid
+     * @param string  $book_uid
      * @param Request $request
      *
      * @return Redirect
      */
-    public function doUpdateUser($user_uid, Request $request)
+    public function doUpdateBook($book_uid, Request $request)
     {
         try {
             // Parse out non param data from incoming request
             $params = $request->except('_url');
 
-            // We can reuse this controller for future for adding another role users
-            $params['role'] = 'member';
+            $book = $this->book->update($params, $book_uid);
 
-            $user = $this->user->update($params, $user_uid);
-
-            return Redirect::to('admin/users/update/' . $user_uid)->with('flash_message', [
+            return Redirect::to('admin/books/update/' . $book_uid)->with('flash_message', [
                 'status'  => 'success',
-                'message' => 'Member updated successfully'
+                'message' => 'Book updated successfully'
             ]);
         } catch (\Exception $e) {
             $error = helpers::errorMessage($e->getMessage());
-            return Redirect::to('admin/users/update/' . $user_uid)->withInput()->with('flash_message', [
+            return Redirect::to('admin/books/update/' . $book_uid)->withInput()->with('flash_message', [
                 'status'       => 'fail',
                 'code'         => $e->getCode(),
                 'message'      => $error['message'],
@@ -213,24 +207,24 @@ class UserController extends Controller
     }
 
     /**
-     * Delete a member
+     * Delete a book
      *
-     * @param string  $user_uid
+     * @param string  $book_uid
      *
      * @return Redirect
      */
-    public function delete($user_uid)
+    public function delete($book_uid)
     {
         try {
-            $user = $this->user->delete($user_uid);
+            $book = $this->book->delete($book_uid);
 
-            return Redirect::to('admin/users')->with('flash_message', [
+            return Redirect::to('admin/books')->with('flash_message', [
                 'status'  => 'success',
-                'message' => 'Member has been deleted successfully'
+                'message' => 'Book has been deleted successfully'
             ]);
         } catch (\Exception $e) {
             $error = helpers::errorMessage($e->getMessage());
-            return Redirect::to('admin/users/update/' . $user_uid)->withInput()->with('flash_message', [
+            return Redirect::to('admin/books/update/' . $book_uid)->withInput()->with('flash_message', [
                 'status'       => 'fail',
                 'code'         => $e->getCode(),
                 'message'      => $error['message'],

@@ -18,5 +18,7 @@ class Book extends Model
 {
     use SoftDeletes;
 
+    public $fillable = ['uid', 'title', 'author', 'isbn', 'quantity', 'shelf_location'];
+
     protected $hidden = ['id', 'deleted_at'];
 }
