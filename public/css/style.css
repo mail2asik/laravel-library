@@ -136,10 +136,10 @@ body a {
 }
 .banner {
 	background: url(../img/banner.jpg) #96b9bd no-repeat center;
-	min-height: 500px;
+	min-height: 200px;
 }
 .banner-info {
-	margin-top: 8em;
+	margin-top: 2em;
 }
 .banner-info h1 {
 	font-size: 3em;

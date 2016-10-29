@@ -7,7 +7,7 @@
  */
 
 // User end (Public Pages)
-Route::get('/', ['as' => 'site.home', 'uses' => 'Site\StaticController@home']);
+Route::get('/', ['as' => 'site.home', 'uses' => 'Site\BookController@home']);
 Route::get('/logout', ['as' => 'site.logout', 'uses' => 'Site\AuthController@logout']);
 Route::get('/activation', ['as' => 'site.activation', 'uses' => 'Site\AuthController@activation']);
 Route::get('/about-us', ['as' => 'site.aboutUs', 'uses' => 'Site\StaticController@aboutUs']);
@@ -40,4 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(array('middleware' => 'csrf'), function () {
         Route::post('doChangePassword', ['as' => 'site.postChangePassword', 'uses' => 'Site\AuthController@doChangePassword']);
     });
+
+    // Books
+    Route::get('books', ['as' => 'site.books', 'uses' => 'Site\BookController@books']);
+    Route::get('/books/borrow/{book_uid}', ['as' => 'site.books.borrowBook', 'uses' => 'Site\BookController@borrowBook']);
+    Route::get('/books/return/{book_uid}', ['as' => 'admin.books.returnBook', 'uses' => 'Site\BookController@returnBook']);
 });

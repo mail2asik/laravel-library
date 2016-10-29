@@ -17,6 +17,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Support\Facades\Log;
 use Cartalyst\Sentinel\Hashing\NativeHasher;
 use Carbon\Carbon;
+use helpers;
 
 /**
  * Class UserRepository
@@ -61,7 +62,7 @@ class UserRepository
                 return Cache::get($key);
             }
 
-            $user = $this->getModel()->where('uid', $user_uid)->with('roles')->first();
+            $user = $this->getModel()->where('uid', $user_uid)->first();
 
             if (empty($user)) {
                 throw new \Exception('User not found');
@@ -83,38 +84,34 @@ class UserRepository
     }
 
     /**
-     * Get a user by api_key
+     * Get a user by id
      *
-     * @param string $api_key
+     * @param $user_id
      *
      * @return User
      *
      * @throws \Exception
      */
-    public function getUserByApiKey($api_key)
+    public function getUserByUserId($user_id)
     {
         try {
-            $key    = __FUNCTION__ . $api_key;
+            $key    = 'getUserByUserid' . $user_id;
             $expire = 30;
 
             if (Cache::has($key)) {
                 return Cache::get($key);
             }
 
-            $user = User::whereHas('api', function ($k) use ($api_key) {
-                $k->where('api_key', $api_key);
-            })->first();
+            $user = $this->getModel()->where('id', $user_id)->first();
 
             if (empty($user)) {
                 throw new \Exception('User not found');
             }
 
-            Cache::put($key, $user, $expire);
-
             return $user;
         } catch (\Exception $e) {
             Log::error(__CLASS__ . ':' . __TRAIT__ . ':' . __FILE__ . ':' . __LINE__ . ':' . __FUNCTION__ . ':' .
-                'Unknown Exception thrown UserRepository@getUserByApiKey', [
+                'Unknown Exception thrown UserRepository@getUserByUserId', [
                 'exception_type' => get_class($e),
                 'message'        => $e->getMessage(),
                 'code'           => $e->getCode(),
@@ -372,5 +369,118 @@ class UserRepository
 
             throw new \Exception($e->getMessage(), $e->getCode());
         }
+    }
+
+    /**
+     * Increase user borrow count by one whenever he/she borrow a book
+     *
+     * @return User
+     *
+     * @throws \Exception
+     */
+    public function increaseBooksBorrowCount($user)
+    {
+        try {
+            // Update
+            $user->no_of_books_borrowed   += 1;
+            $user->update();
+
+            return $user;
+        } catch (\Exception $e) {
+            Log::error(__CLASS__ . ':' . __TRAIT__ . ':' . __FILE__ . ':' . __LINE__ . ':' . __FUNCTION__ . ':' .
+                'Unknown Exception thrown UserRepository@increaseUserBorrowCountById', [
+                'exception_type' => get_class($e),
+                'message'        => $e->getMessage(),
+                'code'           => $e->getCode(),
+                'line_no'        => $e->getLine(),
+                'params'         => func_get_args()
+            ]);
+
+            throw new \Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Decrease user borrow count by one whenever he/she returned a book
+     *
+     * @return integer
+     *
+     * @throws \Exception
+     */
+    public function decreaseBooksBorrowCount($user)
+    {
+        try {
+            // Update
+            $user->no_of_books_borrowed   -= 1;
+            $user->update();
+
+            return $user;
+        } catch (\Exception $e) {
+            Log::error(__CLASS__ . ':' . __TRAIT__ . ':' . __FILE__ . ':' . __LINE__ . ':' . __FUNCTION__ . ':' .
+                'Unknown Exception thrown UserRepository@decreaseUserBorrowCountByUserId', [
+                'exception_type' => get_class($e),
+                'message'        => $e->getMessage(),
+                'code'           => $e->getCode(),
+                'line_no'        => $e->getLine(),
+                'params'         => func_get_args()
+            ]);
+
+            throw new \Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Renew user session by user id
+     *
+     * @param string $user_uid
+     * @return User
+     *
+     * @throws \Exception
+     */
+    public function renewUserSessionByUserId($user_uid)
+    {
+        try {
+            // Get user details
+            $user = $this->getUserByUserUid($user_uid);
+
+            // Update
+            $user_info           = $user->toArray();
+            $user_info['role']   = $user->roles()->first()->toArray();
+
+            // Save session
+            helpers::saveUser($user_info);
+
+            return $user_info;
+        } catch (\Exception $e) {
+            Log::error(__CLASS__ . ':' . __TRAIT__ . ':' . __FILE__ . ':' . __LINE__ . ':' . __FUNCTION__ . ':' .
+                'Unknown Exception thrown UserRepository@renewUserSessionByUserId', [
+                'exception_type' => get_class($e),
+                'message'        => $e->getMessage(),
+                'code'           => $e->getCode(),
+                'line_no'        => $e->getLine(),
+                'params'         => func_get_args()
+            ]);
+
+            throw new \Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Check if member borrowed book already
+     *
+     * @return boolean
+     *
+     * @throws \Exception
+     */
+    public function isUserEligibleToBorrowBook()
+    {
+        // Get user details
+        $user = helpers::getUser();
+
+        if ((int)$user['max_books_eligible'] <= (int)$user['no_of_books_borrowed']) {
+            return false;
+        }
+
+        return true;
     }
 }

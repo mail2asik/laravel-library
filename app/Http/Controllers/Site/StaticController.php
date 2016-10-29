@@ -18,21 +18,6 @@ use Illuminate\Support\Facades\Redirect;
 class StaticController extends Controller
 {
     /**
-     * Home page
-     *
-     * @param $request
-     *
-     * @return View
-     */
-    public function home(Request $request)
-    {
-        return view('user.static.home',[
-            'page_title' => config('app.site_name'). ' - Home',
-            'page_name' => 'home'
-        ]);
-    }
-
-    /**
      * About us page
      *
      * @param $request

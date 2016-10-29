@@ -277,7 +277,7 @@ class AuthController extends Controller
             // Parse out non param data from incoming request
             $params = $request->except('_url');
 
-            $result = $this->auth->passwordChange($params, $user['auth']['api_key']);
+            $result = $this->auth->passwordChange($params, $user['uid']);
 
             return Redirect::to('change-password')->withInput()->with('flash_message', [
                 'status'  => 'success',

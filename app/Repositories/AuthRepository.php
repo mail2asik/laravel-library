@@ -56,7 +56,7 @@ class AuthRepository
             $validator = \Validator::make($input, $requirements);
 
             if ($validator->fails()) {
-                throw new \Exception($validator->messages(), 40002001);
+                throw new \Exception($validator->messages());
             }
 
             $credentials = [
@@ -65,11 +65,10 @@ class AuthRepository
             ];
 
             if (!$user = Sentinel::authenticate($credentials)) {
-                throw new \Exception("An email password combination might be incorrect", 40101002);
+                throw new \Exception("An email password combination might be incorrect");
             }
 
             $user_info                 = $user->toArray();
-            $user_info['auth']         = $user->api()->first()->toArray();
             $user_info['role']         = $user->roles()->first()->toArray();
 
             return $user_info;
@@ -102,11 +101,11 @@ class AuthRepository
             $user = User::where('uid', $user_uid)->first();
 
             if (!$user) {
-                throw new \Exception('User not found', 40102001);
+                throw new \Exception('User not found');
             }
 
             if (!Activation::complete($user, $activation_code)) {
-                throw new \Exception('Missing or invalid activation code', 40301004);
+                throw new \Exception('Missing or invalid activation code');
             }
 
             return true;
@@ -141,14 +140,14 @@ class AuthRepository
 
             $validator = \Validator::make($input, $requirements);
             if ($validator->fails()) {
-                throw new \Exception($validator->messages(), 40001005);
+                throw new \Exception($validator->messages());
             }
 
             // Get User by the email
             $user = User::where('email', $input['email'])->first();
 
             if (!$user) {
-                throw new \Exception('Email does not exist', 40102002);
+                throw new \Exception('Email does not exist');
             }
 
             $reminder = Reminder::create($user);
@@ -190,11 +189,11 @@ class AuthRepository
 
             // Check if password and confirm password matches
             if ($params['password'] !== $params['confirm_password']) {
-                throw new \Exception('New Passwords does not match', 40001006);
+                throw new \Exception('New Passwords does not match');
             }
 
             if (!Reminder::complete($user, $params['token'], $params['password'])) {
-                throw new \Exception('Expired or invalid token', 40301007);
+                throw new \Exception('Expired or invalid token');
             }
 
             return true;
@@ -215,16 +214,16 @@ class AuthRepository
      * Change password
      *
      * @param array $params
-     * @param string $api_key
+     * @param string $user_uid
      *
      * @return void
      *
      * @throws \Exception
      */
-    public function passwordChange($params, $api_key)
+    public function passwordChange($params, $user_uid)
     {
         try {
-            $user = $this->user->getUserByApiKey($api_key);
+            $user = $this->user->getUserByUserUid($user_uid);
 
             $credentials = [
                 "email"    => $user['email'],
@@ -233,20 +232,20 @@ class AuthRepository
 
             if (!$user = Sentinel::authenticate($credentials)) {
                 $error['password'] = "Incorrect password";
-                throw new \Exception(json_encode($error), 40001008);
+                throw new \Exception(json_encode($error));
             }
 
             $requirements = ['new_password' => 'required|min:6'];
             $validator    = Validator::make($params, $requirements);
             if ($validator->fails()) {
                 $messages = $validator->messages();
-                throw new \Exception($messages, 40001008);
+                throw new \Exception($messages);
             }
 
             // Check if password and confirm password matches
             if ($params['new_password'] !== $params['confirm_password']) {
                 $error['confirm_password'] = "New Passwords does not match";
-                throw new \Exception(json_encode($error), 40001008);
+                throw new \Exception(json_encode($error));
             }
 
             $sentinelHasher = new NativeHasher;

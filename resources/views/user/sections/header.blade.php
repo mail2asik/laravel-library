@@ -1,9 +1,9 @@
 <div class="header">
     <div class="container">
-        <div class="logo"> <a href="{{ getenv('MAIN_SITE_DOMAIN') }}"><img src="{{  secure_asset('/img/logo.png') }}" alt="{{ config('app.site_name') }}" width="130"></a> </div>
+        <div class="logo"> <a href="{{ secure_url('/') }}"><img src="{{  secure_asset('/img/logo.png') }}" alt="{{ config('app.site_name') }}" width="130"></a> </div>
         <div class="menu"> <a class="toggleMenu" href="#"><img src="{{  secure_asset('img/nav_icon.png') }}" alt="" /> </a>
             <ul class="nav" id="nav">
-                <li class="{{ Request::is( '/') ? 'current' : '' }}"><a href="{{ secure_url('home') }}">Home</a></li>
+                <li class="{{ Request::is( '/') ? 'current' : '' }}"><a href="{{ secure_url('/') }}">Home</a></li>
                 <li class="{{ Request::is( 'about-us') ? 'current' : '' }}"><a href="{{ secure_url('about-us') }}">About Us</a></li>
 
                 <li><a href="javascript:;">Services</a></li>
