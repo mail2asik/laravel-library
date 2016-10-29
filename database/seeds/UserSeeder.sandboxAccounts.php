@@ -10,13 +10,13 @@ return [
         'api_secret'   => 'vaH6yXBXfi1rQPOUC07BssCLBPtMHqWR4xKQeyrMY1rnxOdZztr1UifYxNT77kwy',
         'is_activated' => 1,
         'data'         => [
-            'first_name' => 'Mohamed',
-            'last_name'  => 'Asik',
-            'gender'     => 'male',
-            'email'      => 'helloasik+admin@gmail.com',
-            'password'   => 'asdasd',
-            'role'       => 'admin',
-            'dob'        => '01-01-1986'
+            'first_name'            => 'Mohamed',
+            'last_name'             => 'Asik',
+            'gender'                => 'male',
+            'email'                 => 'helloasik+admin@gmail.com',
+            'password'              => 'asdasd',
+            'role'                  => 'admin',
+            'dob'                   => '01-01-1986'
         ]
     ],
     [
@@ -28,13 +28,13 @@ return [
         'api_secret'   => 'v40Ovy2qaR1InT3vvW87XdxGu3gFYQSpzJYOgnG3inDyNbCi5uFovDYBpEbIP9zj',
         'is_activated' => 1,
         'data'         => [
-            'first_name' => 'Mohamed',
-            'last_name'  => 'Akmal',
-            'gender'     => 'male',
-            'email'      => 'helloasik+member1@gmail.com',
-            'password'   => 'asdasd',
-            'role'       => 'member',
-            'dob'        => '02-02-1986'
+            'first_name'            => 'Mohamed',
+            'last_name'             => 'Akmal',
+            'gender'                => 'male',
+            'email'                 => 'helloasik+member1@gmail.com',
+            'password'              => 'asdasd',
+            'role'                  => 'member',
+            'dob'                   => '02-02-1986'
         ]
     ],
     [
@@ -46,13 +46,13 @@ return [
         'api_secret'   => 'z7bO6QF7Jv28SQz0sMBy01TetM0CVRzs1T7PM2ZFIKSzqXsrYbUU0AwFm8kgcHud',
         'is_activated' => 1,
         'data'         => [
-            'first_name' => 'Mohamed',
-            'last_name'  => 'Aaquib',
-            'gender'     => 'male',
-            'email'      => 'helloasik+member2@gmail.com',
-            'password'   => 'asdasd',
-            'role'       => 'member',
-            'dob'        => '03-03-1986'
+            'first_name'            => 'Mohamed',
+            'last_name'             => 'Aaquib',
+            'gender'                => 'male',
+            'email'                 => 'helloasik+member2@gmail.com',
+            'password'              => 'asdasd',
+            'role'                  => 'member',
+            'dob'                   => '03-03-1986'
         ]
     ],
 ];

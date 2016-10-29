@@ -23,9 +23,9 @@ class User extends CartalystUser
 {
     use SoftDeletes;
 
-    public $fillable = ['uid', 'first_name', 'last_name', 'email', 'password', 'gender', 'dob'];
+    public $fillable = ['uid', 'first_name', 'last_name', 'email', 'password', 'gender', 'dob', 'no_of_books_borrowed'];
 
-    protected $appends = ['is_activated', 'age'];
+    protected $appends = ['is_activated', 'age', 'max_books_eligible'];
 
     /**
      * Hides these data from being displayed
@@ -57,6 +57,17 @@ class User extends CartalystUser
     }
 
     /**
+     * Change DOB format as "mm/dd/yyyy"
+     *
+     * @return string
+     */
+    public function getDobAttribute()
+    {
+        $dob = $this->attributes['dob'];
+        return ($dob != '0000-00-00') ? Carbon::parse($dob)->format('m/d/Y') : '';
+    }
+
+    /**
      * Attach age
      *
      * @return integer
@@ -68,13 +79,25 @@ class User extends CartalystUser
     }
 
     /**
-     * Change DOB format as "mm/dd/yyyy"
+     * Calculate number of books eligible based on age
+     * Each Member can loan a maximum of 6 books
+     * Each Junior Member (age <= 12 years) can loan a maximum of 3 books
      *
-     * @return string
+     * @return integer
      */
-    public function getDobAttribute()
+    public function getMaxBooksEligibleAttribute()
     {
         $dob = $this->attributes['dob'];
-        return ($dob != '0000-00-00') ? Carbon::parse($dob)->format('m/d/Y') : '';
+        $age = ($dob != '0000-00-00') ? Carbon::parse($dob)->age : '';
+
+        if (empty($age)) {
+            return 0;
+        }
+
+        if ($age <= 12) {
+            return 3;
+        }
+
+        return 6;
     }
 }

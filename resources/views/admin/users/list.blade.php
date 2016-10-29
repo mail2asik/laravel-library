@@ -3,24 +3,24 @@
         <table class="table table-bordered table-striped dataTable" role="grid">
             <thead>
             <tr role="row">
-                <th tabindex="0" rowspan="1" colspan="1" style="width:100px;">First Name</th>
-                <th tabindex="0" rowspan="1" colspan="1" style="width:100px;">Last Name</th>
+                <th tabindex="0" rowspan="1" colspan="1" style="width:100px;">Name</th>
                 <th tabindex="0" rowspan="1" colspan="1" style="width:150px;">Email</th>
-                <th tabindex="0" rowspan="1" colspan="1" style="width:150px;">Gender</th>
-                <th tabindex="0" rowspan="1" colspan="1" style="width:150px;">DOB</th>
-                <th tabindex="0" rowspan="1" colspan="1" style="width:150px;">Age</th>
+                <th tabindex="0" rowspan="1" colspan="1">Gender</th>
+                <th tabindex="0" rowspan="1" colspan="1">DOB</th>
+                <th tabindex="0" rowspan="1" colspan="1">Age</th>
+                <th tabindex="0" rowspan="1" colspan="1">Max Books Eligible</th>
             </tr>
             </thead>
             <tbody>
             @if (!empty($data))
                 @foreach($data as $user)
                 <tr role="row" class="odd">
-                    <td><a href="{{ secure_url('admin/users/update', ['user_uid' => $user['uid']]) }}">{{ $user['first_name'] }}</a></td>
-                    <td>{{ $user['last_name'] }}</td>
+                    <td><a href="{{ secure_url('admin/users/update', ['user_uid' => $user['uid']]) }}">{{ $user['first_name'] }} {{ $user['last_name'] }}</a></td>
                     <td>{{ $user['email'] }}</td>
                     <td>{{ ucfirst($user['gender']) }}</td>
                     <td>{{ $user['dob'] }}</td>
                     <td>{{ $user['age'] }}</td>
+                    <td>{{ $user['max_books_eligible'] }}</td>
                 </tr>
                 @endforeach
             @else

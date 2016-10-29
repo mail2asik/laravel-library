@@ -21,6 +21,7 @@ class UpdateUsersTable extends Migration {
             $table->string('last_name', 15)->after('first_name')->default('');
             $table->string('gender', 15)->after('last_name')->default('');
             $table->date('dob')->after('gender')->default('0000-00-00');
+            $table->tinyInteger('no_of_books_borrowed')->after('dob')->default(0);
 
             $table->softDeletes();
 
