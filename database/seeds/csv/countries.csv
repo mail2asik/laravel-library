@@ -1,0 +1,246 @@
+id,country_code,country_name,deleted_at
+1,AF,Afghanistan,NULL
+2,AX,Aland Islands,NULL
+3,AL,Albania,NULL
+4,DZ,Algeria,NULL
+5,AS,American Samoa,NULL
+6,AD,Andorra,NULL
+7,AO,Angola,NULL
+8,AI,Anguilla,NULL
+9,AQ,Antarctica,NULL
+10,AG,Antigua And Barbuda,NULL
+11,AR,Argentina,NULL
+12,AM,Armenia,NULL
+13,AW,Aruba,NULL
+14,AU,Australia,NULL
+15,AT,Austria,NULL
+16,AZ,Azerbaijan,NULL
+17,BS,Bahamas,NULL
+18,BH,Bahrain,NULL
+19,BD,Bangladesh,NULL
+20,BB,Barbados,NULL
+21,BY,Belarus,NULL
+22,BE,Belgium,NULL
+23,BZ,Belize,NULL
+24,BJ,Benin,NULL
+25,BM,Bermuda,NULL
+26,BT,Bhutan,NULL
+27,BO,Bolivia,NULL
+28,BA,Bosnia And Herzegovina,NULL
+29,BW,Botswana,NULL
+30,BV,Bouvet Island,NULL
+31,BR,Brazil,NULL
+32,IO,British Indian Ocean Territory,NULL
+33,BN,Brunei Darussalam,NULL
+34,BG,Bulgaria,NULL
+35,BF,Burkina Faso,NULL
+36,BI,Burundi,NULL
+37,KH,Cambodia,NULL
+38,CM,Cameroon,NULL
+39,CA,Canada,NULL
+40,CV,Cape Verde,NULL
+41,KY,Cayman Islands,NULL
+42,CF,Central African Republic,NULL
+43,TD,Chad,NULL
+44,CL,Chile,NULL
+45,CN,China,NULL
+46,CX,Christmas Island,NULL
+47,CC,Cocos (Keeling) Islands,NULL
+48,CO,Colombia,NULL
+49,KM,Comoros,NULL
+50,CG,Congo,NULL
+51,CD,"Congo, Democratic Republic",NULL
+52,CK,Cook Islands,NULL
+53,CR,Costa Rica,NULL
+54,CI,"Cote D\Ivoire""",NULL
+55,HR,Croatia,NULL
+56,CU,Cuba,NULL
+57,CY,Cyprus,NULL
+58,CZ,Czech Republic,NULL
+59,DK,Denmark,NULL
+60,DJ,Djibouti,NULL
+61,DM,Dominica,NULL
+62,DO,Dominican Republic,NULL
+63,EC,Ecuador,NULL
+64,EG,Egypt,NULL
+65,SV,El Salvador,NULL
+66,GQ,Equatorial Guinea,NULL
+67,ER,Eritrea,NULL
+68,EE,Estonia,NULL
+69,ET,Ethiopia,NULL
+70,FK,Falkland Islands (Malvinas),NULL
+71,FO,Faroe Islands,NULL
+72,FJ,Fiji,NULL
+73,FI,Finland,NULL
+74,FR,France,NULL
+75,GF,French Guiana,NULL
+76,PF,French Polynesia,NULL
+77,TF,French Southern Territories,NULL
+78,GA,Gabon,NULL
+79,GM,Gambia,NULL
+80,GE,Georgia,NULL
+81,DE,Germany,NULL
+82,GH,Ghana,NULL
+83,GI,Gibraltar,NULL
+84,GR,Greece,NULL
+85,GL,Greenland,NULL
+86,GD,Grenada,NULL
+87,GP,Guadeloupe,NULL
+88,GU,Guam,NULL
+89,GT,Guatemala,NULL
+90,GG,Guernsey,NULL
+91,GN,Guinea,NULL
+92,GW,Guinea-Bissau,NULL
+93,GY,Guyana,NULL
+94,HT,Haiti,NULL
+95,HM,Heard Island & Mcdonald Islands,NULL
+96,VA,Holy See (Vatican City State),NULL
+97,HN,Honduras,NULL
+98,HK,Hong Kong,NULL
+99,HU,Hungary,NULL
+100,IS,Iceland,NULL
+101,IN,India,NULL
+102,ID,Indonesia,NULL
+103,IR,"Iran, Islamic Republic Of",NULL
+104,IQ,Iraq,NULL
+105,IE,Ireland,NULL
+106,IM,Isle Of Man,NULL
+107,IL,Israel,NULL
+108,IT,Italy,NULL
+109,JM,Jamaica,NULL
+110,JP,Japan,NULL
+111,JE,Jersey,NULL
+112,JO,Jordan,NULL
+113,KZ,Kazakhstan,NULL
+114,KE,Kenya,NULL
+115,KI,Kiribati,NULL
+116,KR,Korea,NULL
+117,KW,Kuwait,NULL
+118,KG,Kyrgyzstan,NULL
+119,LA,"Lao People\s Democratic Republic""",NULL
+120,LV,Latvia,NULL
+121,LB,Lebanon,NULL
+122,LS,Lesotho,NULL
+123,LR,Liberia,NULL
+124,LY,Libyan Arab Jamahiriya,NULL
+125,LI,Liechtenstein,NULL
+126,LT,Lithuania,NULL
+127,LU,Luxembourg,NULL
+128,MO,Macao,NULL
+129,MK,Macedonia,NULL
+130,MG,Madagascar,NULL
+131,MW,Malawi,NULL
+132,MY,Malaysia,NULL
+133,MV,Maldives,NULL
+134,ML,Mali,NULL
+135,MT,Malta,NULL
+136,MH,Marshall Islands,NULL
+137,MQ,Martinique,NULL
+138,MR,Mauritania,NULL
+139,MU,Mauritius,NULL
+140,YT,Mayotte,NULL
+141,MX,Mexico,NULL
+142,FM,"Micronesia, Federated States Of",NULL
+143,MD,Moldova,NULL
+144,MC,Monaco,NULL
+145,MN,Mongolia,NULL
+146,ME,Montenegro,NULL
+147,MS,Montserrat,NULL
+148,MA,Morocco,NULL
+149,MZ,Mozambique,NULL
+150,MM,Myanmar,NULL
+151,NA,Namibia,NULL
+152,NR,Nauru,NULL
+153,NP,Nepal,NULL
+154,NL,Netherlands,NULL
+155,AN,Netherlands Antilles,NULL
+156,NC,New Caledonia,NULL
+157,NZ,New Zealand,NULL
+158,NI,Nicaragua,NULL
+159,NE,Niger,NULL
+160,NG,Nigeria,NULL
+161,NU,Niue,NULL
+162,NF,Norfolk Island,NULL
+163,MP,Northern Mariana Islands,NULL
+164,NO,Norway,NULL
+165,OM,Oman,NULL
+166,PK,Pakistan,NULL
+167,PW,Palau,NULL
+168,PS,"Palestinian Territory, Occupied",NULL
+169,PA,Panama,NULL
+170,PG,Papua New Guinea,NULL
+171,PY,Paraguay,NULL
+172,PE,Peru,NULL
+173,PH,Philippines,NULL
+174,PN,Pitcairn,NULL
+175,PL,Poland,NULL
+176,PT,Portugal,NULL
+177,PR,Puerto Rico,NULL
+178,QA,Qatar,NULL
+179,RE,Reunion,NULL
+180,RO,Romania,NULL
+181,RU,Russian Federation,NULL
+182,RW,Rwanda,NULL
+183,BL,Saint Barthelemy,NULL
+184,SH,Saint Helena,NULL
+185,KN,Saint Kitts And Nevis,NULL
+186,LC,Saint Lucia,NULL
+187,MF,Saint Martin,NULL
+188,PM,Saint Pierre And Miquelon,NULL
+189,VC,Saint Vincent And Grenadines,NULL
+190,WS,Samoa,NULL
+191,SM,San Marino,NULL
+192,ST,Sao Tome And Principe,NULL
+193,SA,Saudi Arabia,NULL
+194,SN,Senegal,NULL
+195,RS,Serbia,NULL
+196,SC,Seychelles,NULL
+197,SL,Sierra Leone,NULL
+198,SG,Singapore,NULL
+199,SK,Slovakia,NULL
+200,SI,Slovenia,NULL
+201,SB,Solomon Islands,NULL
+202,SO,Somalia,NULL
+203,ZA,South Africa,NULL
+204,GS,South Georgia And Sandwich Isl.,NULL
+205,ES,Spain,NULL
+206,LK,Sri Lanka,NULL
+207,SD,Sudan,NULL
+208,SR,Suriname,NULL
+209,SJ,Svalbard And Jan Mayen,NULL
+210,SZ,Swaziland,NULL
+211,SE,Sweden,NULL
+212,CH,Switzerland,NULL
+213,SY,Syrian Arab Republic,NULL
+214,TW,Taiwan,NULL
+215,TJ,Tajikistan,NULL
+216,TZ,Tanzania,NULL
+217,TH,Thailand,NULL
+218,TL,Timor-Leste,NULL
+219,TG,Togo,NULL
+220,TK,Tokelau,NULL
+221,TO,Tonga,NULL
+222,TT,Trinidad And Tobago,NULL
+223,TN,Tunisia,NULL
+224,TR,Turkey,NULL
+225,TM,Turkmenistan,NULL
+226,TC,Turks And Caicos Islands,NULL
+227,TV,Tuvalu,NULL
+228,UG,Uganda,NULL
+229,UA,Ukraine,NULL
+230,AE,United Arab Emirates,NULL
+231,GB,United Kingdom,NULL
+232,US,United States,NULL
+233,UM,United States Outlying Islands,NULL
+234,UY,Uruguay,NULL
+235,UZ,Uzbekistan,NULL
+236,VU,Vanuatu,NULL
+237,VE,Venezuela,NULL
+238,VN,Viet Nam,NULL
+239,VG,"Virgin Islands, British",NULL
+240,VI,"Virgin Islands, U.S.",NULL
+241,WF,Wallis And Futuna,NULL
+242,EH,Western Sahara,NULL
+243,YE,Yemen,NULL
+244,ZM,Zambia,NULL
+245,ZW,Zimbabwe,NULL
