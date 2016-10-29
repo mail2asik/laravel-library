@@ -30,5 +30,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
     Route::group(array('middleware' => 'csrf'), function () {
         Route::post('doUpdateUser/{user_uid}', ['as' => 'admin.postUpdateUser', 'uses' => 'admin\UserController@doUpdateUser']);
     });
+    Route::get('/users/delete/{user_uid}', ['as' => 'admin.users.delete', 'uses' => 'admin\UserController@delete']);
 
 });

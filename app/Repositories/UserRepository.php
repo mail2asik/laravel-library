@@ -16,6 +16,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Support\Facades\Log;
 use Cartalyst\Sentinel\Hashing\NativeHasher;
+use Carbon\Carbon;
 
 /**
  * Class UserRepository
@@ -94,7 +95,7 @@ class UserRepository
             $user->first_name   = $params['first_name'];
             $user->last_name    = $params['last_name'];
             $user->gender       = $params['gender'];
-            $user->dob          = $params['dob'];
+            $user->dob          = Carbon::parse($params['dob'])->format('Y-m-d');
             $user->save();
 
             // Assign user to role
@@ -134,13 +135,12 @@ class UserRepository
      *
      * @param array     $params
      * @param string    $user_uid
-     * @param string    $api_key
      *
      * @return array
      *
      * @throws \Exception
      */
-    public function update($params, $user_uid, $api_key)
+    public function update($params, $user_uid)
     {
         try {
             //Get user details
@@ -198,7 +198,7 @@ class UserRepository
                 'first_name'    => $params['first_name'],
                 'last_name'     => $params['last_name'],
                 'gender'        => $params['gender'],
-                'dob'           => $params['dob'],
+                'dob'           => Carbon::parse($params['dob'])->format('Y-m-d'),
             ];
             $this->getModel()->where('id', $user->id)->update($params);
 
@@ -311,13 +311,12 @@ class UserRepository
      * Get a list of users
      *
      * @param array  $params
-     * @param string $api_key
      *
      * @return array
      *
      * @throws \Exception
      */
-    public function getAllUsers($params, $api_key)
+    public function getAllUsers($params)
     {
         try {
             $users = $this->getModel()
@@ -339,6 +338,39 @@ class UserRepository
         } catch (\Exception $e) {
             Log::error(__CLASS__ . ':' . __TRAIT__ . ':' . __FILE__ . ':' . __LINE__ . ':' . __FUNCTION__ . ':' .
                 'Unknown Exception thrown UserRepository@getAllUsers', [
+                'exception_type' => get_class($e),
+                'message'        => $e->getMessage(),
+                'code'           => $e->getCode(),
+                'line_no'        => $e->getLine(),
+                'params'         => func_get_args()
+            ]);
+
+            throw new \Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Delete a user
+     *
+     * @param string $user_uid
+     *
+     * @return boolean
+     *
+     * @throws \Exception
+     */
+    public function delete($user_uid)
+    {
+        try {
+            //Get user details
+            $user = $this->getUserByUserUid($user_uid);
+
+            // Delete user
+            $user->delete();
+
+            return true;
+        } catch (\Exception $e) {
+            Log::error(__CLASS__ . ':' . __TRAIT__ . ':' . __FILE__ . ':' . __LINE__ . ':' . __FUNCTION__ . ':' .
+                'Unknown Exception thrown UserRepository@delete', [
                 'exception_type' => get_class($e),
                 'message'        => $e->getMessage(),
                 'code'           => $e->getCode(),

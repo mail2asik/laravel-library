@@ -115,7 +115,6 @@ sudo sed -i "/DB_DATABASE=/c\DB_DATABASE=${TARGETDBNAME}" .env
 sudo sed -i "/DB_USERNAME=/c\DB_USERNAME=${TARGETDBUSER}" .env
 sudo sed -i "/DB_PASSWORD=/c\DB_PASSWORD=${TARGETDBPASS}" .env
 sudo sed -i "/DBA_PASSWORD=/c\DBA_PASSWORD=${TARGETDBAPASS}" .env
-sudo sed -i "/TRUSTED_PROXIES=/c\TRUSTED_PROXIES=${TRUSTEDPROXIES}" .env
 
 #
 # Install root config files.

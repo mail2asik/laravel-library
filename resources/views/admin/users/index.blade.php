@@ -1,6 +1,7 @@
 @extends('admin_template')
 @section('content')
     <div class='row'>
+        @include('admin.sections.flash-message')
         <div class="col-xs-12">
 
             <div class="box">

@@ -26,13 +26,6 @@ MAIL_PRETEND=true
 MAILGUN_DOMAIN=
 MAILGUN_SECRET=
 
-MAIL_FROM=support@zoviyo.com
+MAIL_FROM=asik@amasik.com
 
-# Comma-delimited ip address of trusted proxies
-TRUSTED_PROXIES=
-
-# Switches to set below here
-ACCESSLOG_SWITCH=off
-QUEUE_SWITCH=off
-
-SITE_URL=https://pilot-project.amasik.com
+SITE_URL=https://laravel-library.amasik.com

@@ -112,7 +112,7 @@ class SettingController extends Controller
             // Parse out non param data from incoming request
             $params = $request->except('_url');
 
-            $result = $this->user->update($request->all(), $user['uid'], $user['auth']['api_key']);
+            $result = $this->user->update($request->all(), $user['uid']);
 
             // Update session
             helpers::saveUser($result);

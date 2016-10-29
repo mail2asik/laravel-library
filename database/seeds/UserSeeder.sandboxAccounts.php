@@ -16,7 +16,7 @@ return [
             'email'      => 'helloasik+admin@gmail.com',
             'password'   => 'asdasd',
             'role'       => 'admin',
-            'dob'        => '1986-01-01'
+            'dob'        => '01-01-1986'
         ]
     ],
     [
@@ -34,7 +34,7 @@ return [
             'email'      => 'helloasik+member1@gmail.com',
             'password'   => 'asdasd',
             'role'       => 'member',
-            'dob'        => '1986-02-02'
+            'dob'        => '02-02-1986'
         ]
     ],
     [
@@ -52,7 +52,7 @@ return [
             'email'      => 'helloasik+member2@gmail.com',
             'password'   => 'asdasd',
             'role'       => 'member',
-            'dob'        => '1986-03-03'
+            'dob'        => '03-03-1986'
         ]
     ],
 ];

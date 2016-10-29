@@ -108,10 +108,12 @@
                     </div>
                 </div>
 
-                @include('admin.common.submit_button', [
+                @include('admin.common.submit_delete_button', [
                 'box_style' => true,
-                'button_label' => 'Submit'
-                ])
+                'submit_button_label' => 'Submit',
+                'delete_button_label' => 'Delete',
+                'delete_action_url'   =>  secure_url('admin/users/delete/'. $user['uid'])
+        ])
             </div>
         </form>
     </div>

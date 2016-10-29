@@ -99,7 +99,7 @@ class UserController extends Controller
         try {
             $user = helpers::getUser();
 
-            $users = $this->user->getAllUsers($params, $user['auth']['api_key']);
+            $users = $this->user->getAllUsers($params);
 
             if (!empty($users['data'])) {
 
@@ -198,19 +198,44 @@ class UserController extends Controller
     public function doUpdateUser($user_uid, Request $request)
     {
         try {
-            $user = helpers::getUser();
-
             // Parse out non param data from incoming request
             $params = $request->except('_url');
 
             // We can reuse this controller for future for adding another role users
             $params['role'] = 'member';
 
-            $user = $this->user->update($params, $user_uid, $user['auth']['api_key']);
+            $user = $this->user->update($params, $user_uid);
 
             return Redirect::to('admin/users/update/' . $user_uid)->with('flash_message', [
                 'status'  => 'success',
                 'message' => 'Member updated successfully'
+            ]);
+        } catch (\Exception $e) {
+            $error = helpers::errorMessage($e->getMessage());
+            return Redirect::to('admin/users/update/' . $user_uid)->withInput()->with('flash_message', [
+                'status'       => 'fail',
+                'code'         => $e->getCode(),
+                'message'      => $error['message'],
+                'error_fields' => $error['error']
+            ]);
+        }
+    }
+
+    /**
+     * Delete a member
+     *
+     * @param string  $user_uid
+     *
+     * @return Redirect
+     */
+    public function delete($user_uid)
+    {
+        try {
+            $user = $this->user->delete($user_uid);
+
+            return Redirect::to('admin/users')->with('flash_message', [
+                'status'  => 'success',
+                'message' => 'Member has been deleted successfully'
             ]);
         } catch (\Exception $e) {
             $error = helpers::errorMessage($e->getMessage());
