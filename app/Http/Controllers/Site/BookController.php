@@ -65,7 +65,7 @@ class BookController extends Controller
 
             // Save the last page requested
             $page_url = '/?page=' . $params['page'] . '&limit=' . $params['limit'] . '&search_by_keywords=' . urlencode($params['search_by_keywords']);
-            Session::put('page.books', url($page_url));
+            Session::put('page.public_books', url($page_url));
 
             // If ajax request, return specific page response
             if ($request->ajax()) {

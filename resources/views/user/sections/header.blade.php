@@ -1,9 +1,9 @@
 <div class="header">
     <div class="container">
-        <div class="logo"> <a href="{{ secure_url('/') }}"><img src="{{  secure_asset('/img/logo.png') }}" alt="{{ config('app.site_name') }}" width="130"></a> </div>
+        <div class="logo"> <a href="{{ session()->has('page.public_books')? session('page.public_books') : secure_url('/') }}"><img src="{{  secure_asset('/img/logo.png') }}" alt="{{ config('app.site_name') }}" width="130"></a> </div>
         <div class="menu"> <a class="toggleMenu" href="#"><img src="{{  secure_asset('img/nav_icon.png') }}" alt="" /> </a>
             <ul class="nav" id="nav">
-                <li class="{{ Request::is( '/') ? 'current' : '' }}"><a href="{{ secure_url('/') }}">Books</a></li>
+                <li class="{{ Request::is( '/') ? 'current' : '' }}"><a href="{{ session()->has('page.public_books')? session('page.public_books') : secure_url('/') }}">Books</a></li>
                 <li class="{{ Request::is( 'about-us') ? 'current' : '' }}"><a href="{{ secure_url('about-us') }}">About Us</a></li>
 
                 <li class="{{ Request::is( 'services') ? 'current' : '' }}"><a href="{{ secure_url('services') }}">Services</a></li>
