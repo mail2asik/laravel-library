@@ -43,4 +43,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminAuth'], function () {
         Route::post('doUpdateBook/{book_uid}', ['as' => 'admin.postUpdateBook', 'uses' => 'admin\BookController@doUpdateBook']);
     });
     Route::get('/books/delete/{book_uid}', ['as' => 'admin.books.delete', 'uses' => 'admin\BookController@delete']);
+    Route::get('/books/collect/{book_uid}/{user_uid}', ['as' => 'admin.books.collectBook', 'uses' => 'admin\BookController@collectBook']);
+
+    // Reports
+    Route::get('reports', ['as' => 'admin.reports', 'uses' => 'admin\ReportController@index']);
 });

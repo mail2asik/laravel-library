@@ -227,8 +227,8 @@ class BookRepository
             // Get user details
             $user = $this->user->getUserByUserUid($params['user_uid']);
 
-            $userBooks = Book::select(['books.*', 'memberbooks.*', 'books.uid as book_uid', 'memberbooks.uid as memberbook_uid'])
-                ->join('memberbooks', 'books.id', '=', 'memberbooks.book_id')
+            $userBooks = MemberBook::select(['books.*', 'memberbooks.*', 'books.uid as book_uid', 'memberbooks.uid as memberbook_uid'])
+                ->join('books', 'books.id', '=', 'memberbooks.book_id')
                 ->where('memberbooks.user_id', $user['id']);
 
             // Search by keywords
@@ -311,7 +311,7 @@ class BookRepository
             }
 
             // Check if user have a eligible to borrow books
-            if (!$this->user->isUserEligibleToBorrowBook()) {
+            if (!$this->user->isUserEligibleToBorrowBook($user)) {
                 throw new \Exception('You are exceeded the limit to borrow additional books');
             }
 
@@ -335,6 +335,10 @@ class BookRepository
 
             // Increase books loan count
             $this->increaseBooksLoanCount($book);
+
+            // Forgot user cache to refresh no_of_books_borrowed
+            Cache::forget('getUserByUserUid' . $user['id']);
+            Cache::forget('getUserByUserid'  . $user['id']);
 
             return true;
         } catch (\Exception $e) {
@@ -377,7 +381,8 @@ class BookRepository
             }
 
             // Update data
-            $memberBook->status = config('constants.member_book_statuses')[1];
+            $memberBook->status     = config('constants.member_book_statuses')[1];
+            $memberBook->returned_at = Carbon::now()->toDateTimeString();
             $memberBook->save();
 
             // Decrease user books borrow count

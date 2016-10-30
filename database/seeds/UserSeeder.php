@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\Models\Api;
 use App\Repositories\ApiRepository;
-use App\Models\Country;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Repositories\AuthRepository;

@@ -21,7 +21,12 @@ class Authenticate
             //Store requested url in session & redirect to this page after successful login
             $request->session()->put('intended_url', $request->fullUrl());
 
-            return redirect()->guest('login');
+            return redirect()->guest('login')->with('flash_message', [
+                'status'       => 'fail',
+                'code'         => '10000',
+                'message'      => 'You need to login to perform this action',
+                'error_fields' => ''
+            ]);
         }
 
         $user = helpers::getUser();

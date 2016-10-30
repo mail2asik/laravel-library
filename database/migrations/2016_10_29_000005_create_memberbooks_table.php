@@ -20,6 +20,7 @@ class CreateMemberbooksTable extends Migration {
             $table->integer('book_id')->unsigned()->nullable();
             $table->timestamp('started_at')->default('0000-00-00 00:00:00');
             $table->timestamp('ended_at')->default('0000-00-00 00:00:00');
+            $table->timestamp('returned_at')->default('0000-00-00 00:00:00');
             $table->string('status', 20)->nullable();
 
             $table->timestamps();

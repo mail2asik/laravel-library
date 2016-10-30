@@ -11,6 +11,9 @@ Route::get('/', ['as' => 'site.home', 'uses' => 'Site\BookController@home']);
 Route::get('/logout', ['as' => 'site.logout', 'uses' => 'Site\AuthController@logout']);
 Route::get('/activation', ['as' => 'site.activation', 'uses' => 'Site\AuthController@activation']);
 Route::get('/about-us', ['as' => 'site.aboutUs', 'uses' => 'Site\StaticController@aboutUs']);
+Route::get('/services', ['as' => 'site.services', 'uses' => 'Site\StaticController@services']);
+Route::get('/winners', ['as' => 'site.winners', 'uses' => 'Site\StaticController@winners']);
+Route::get('/jobs', ['as' => 'site.jobs', 'uses' => 'Site\StaticController@jobs']);
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/activate', ['as' => 'site.activate', 'uses' => 'Site\AuthController@doActivate']);
@@ -44,5 +47,5 @@ Route::group(['middleware' => 'auth'], function () {
     // Books
     Route::get('books', ['as' => 'site.books', 'uses' => 'Site\BookController@books']);
     Route::get('/books/borrow/{book_uid}', ['as' => 'site.books.borrowBook', 'uses' => 'Site\BookController@borrowBook']);
-    Route::get('/books/return/{book_uid}', ['as' => 'admin.books.returnBook', 'uses' => 'Site\BookController@returnBook']);
+    Route::get('/books/return/{book_uid}', ['as' => 'site.books.returnBook', 'uses' => 'Site\BookController@returnBook']);
 });

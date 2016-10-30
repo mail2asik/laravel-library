@@ -3,12 +3,12 @@
         <div class="logo"> <a href="{{ secure_url('/') }}"><img src="{{  secure_asset('/img/logo.png') }}" alt="{{ config('app.site_name') }}" width="130"></a> </div>
         <div class="menu"> <a class="toggleMenu" href="#"><img src="{{  secure_asset('img/nav_icon.png') }}" alt="" /> </a>
             <ul class="nav" id="nav">
-                <li class="{{ Request::is( '/') ? 'current' : '' }}"><a href="{{ secure_url('/') }}">Home</a></li>
+                <li class="{{ Request::is( '/') ? 'current' : '' }}"><a href="{{ secure_url('/') }}">Books</a></li>
                 <li class="{{ Request::is( 'about-us') ? 'current' : '' }}"><a href="{{ secure_url('about-us') }}">About Us</a></li>
 
-                <li><a href="javascript:;">Services</a></li>
-                <li><a href="javascript:;">Winners</a></li>
-                <li><a href="javascript:;">Jobs</a></li>
+                <li class="{{ Request::is( 'services') ? 'current' : '' }}"><a href="{{ secure_url('services') }}">Services</a></li>
+                <li class="{{ Request::is( 'winners') ? 'current' : '' }}"><a href="{{ secure_url('winners') }}">Winners</a></li>
+                <li class="{{ Request::is( 'jobs') ? 'current' : '' }}"><a href="{{ secure_url('jobs') }}">Jobs</a></li>
                 @if(!empty($logged_in_user))
                     <li class="bgGrey">
                         @if($logged_in_user['role']['slug'] != 'customer')

@@ -232,4 +232,32 @@ class BookController extends Controller
             ]);
         }
     }
+
+    /**
+     * Collect a book
+     *
+     * @param string $book_uid
+     * @param string $user_uid
+     *
+     * @return Redirect
+     */
+    public function collectBook($book_uid, $user_uid)
+    {
+        try {
+            $book = $this->book->returnBook($book_uid, $user_uid);
+
+            return Redirect::back()->with('flash_message', [
+                'status'  => 'success',
+                'message' => 'Book has been collected successfully'
+            ]);
+        } catch (\Exception $e) {
+            $error = helpers::errorMessage($e->getMessage());
+            return Redirect::back()->withInput()->with('flash_message', [
+                'status'       => 'fail',
+                'code'         => $e->getCode(),
+                'message'      => $error['message'],
+                'error_fields' => $error['error']
+            ]);
+        }
+    }
 }

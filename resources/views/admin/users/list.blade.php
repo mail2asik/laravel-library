@@ -3,12 +3,13 @@
         <table class="table table-bordered table-striped dataTable" role="grid">
             <thead>
             <tr role="row">
-                <th tabindex="0" rowspan="1" colspan="1" style="width:100px;">Name</th>
-                <th tabindex="0" rowspan="1" colspan="1" style="width:150px;">Email</th>
+                <th tabindex="0" rowspan="1" colspan="1">Name</th>
+                <th tabindex="0" rowspan="1" colspan="1">Email</th>
                 <th tabindex="0" rowspan="1" colspan="1">Gender</th>
-                <th tabindex="0" rowspan="1" colspan="1">DOB</th>
-                <th tabindex="0" rowspan="1" colspan="1">Age</th>
+                <th tabindex="0" rowspan="1" colspan="1">DOB (Age)</th>
                 <th tabindex="0" rowspan="1" colspan="1">Max Books Eligible</th>
+                <th tabindex="0" rowspan="1" colspan="1">No of books borrowed</th>
+                <th>Email</th>
             </tr>
             </thead>
             <tbody>
@@ -18,9 +19,22 @@
                     <td><a href="{{ secure_url('admin/users/update', ['user_uid' => $user['uid']]) }}">{{ $user['first_name'] }} {{ $user['last_name'] }}</a></td>
                     <td>{{ $user['email'] }}</td>
                     <td>{{ ucfirst($user['gender']) }}</td>
-                    <td>{{ $user['dob'] }}</td>
-                    <td>{{ $user['age'] }}</td>
+                    <td>{{ $user['dob'] }} ({{ $user['age'] }})</td>
                     <td>{{ $user['max_books_eligible'] }}</td>
+                    <td>
+                        <a href="{{ secure_url('admin/reports?user_uid='. $user['uid']) }}">
+                            <span class="label label-danger">
+                             {{ $user['no_of_books_borrowed'] }}
+                            </span>
+                        </a>
+                    </td>
+                    <td>
+                        @if($user['is_activated'] == '1')
+                            <span class="label label-success">ACTIVE</span>
+                        @else
+                            <span class="label label-warning">INACTIVE</span>
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
             @else

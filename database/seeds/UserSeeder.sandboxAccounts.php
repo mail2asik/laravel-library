@@ -31,7 +31,7 @@ return [
             'first_name'            => 'Mohamed',
             'last_name'             => 'Akmal',
             'gender'                => 'male',
-            'email'                 => 'helloasik+member1@gmail.com',
+            'email'                 => 'helloasik+akmal@gmail.com',
             'password'              => 'asdasd',
             'role'                  => 'member',
             'dob'                   => '02-02-1986'
@@ -49,10 +49,64 @@ return [
             'first_name'            => 'Mohamed',
             'last_name'             => 'Aaquib',
             'gender'                => 'male',
-            'email'                 => 'helloasik+member2@gmail.com',
+            'email'                 => 'helloasik+aaquib@gmail.com',
             'password'              => 'asdasd',
             'role'                  => 'member',
             'dob'                   => '03-03-1986'
+        ]
+    ],
+    [
+        /*
+         * User 4: Member
+         */
+        'uid'          => 'b8c99ed5-0080-4be6-9ae6-d4f0649d6f6b',
+        'api_key'      => '0af3727893c64aceba06da06be84efbb',
+        'api_secret'   => 'z7bO6QF7Jv28SQz0sMBy01TetM0CVRzs1T7PM2ZFIKSzqXsrYbUU0AwFm8kgcHle',
+        'is_activated' => 1,
+        'data'         => [
+            'first_name'            => 'John',
+            'last_name'             => 'Smith',
+            'gender'                => 'male',
+            'email'                 => 'helloasik+john@gmail.com',
+            'password'              => 'asdasd',
+            'role'                  => 'member',
+            'dob'                   => '04-04-2006'
+        ]
+    ],
+    [
+        /*
+         * User 5: Member
+         */
+        'uid'          => 'b8c99ed5-0080-4be6-9ae6-d4f0649d6f7c',
+        'api_key'      => '0af3727893c64aceba06da06be84efcc',
+        'api_secret'   => 'z7bO6QF7Jv28SQz0sMBy01TetM0CVRzs1T7PM2ZFIKSzqXsrYbUU0AwFm8kgcHmf',
+        'is_activated' => 1,
+        'data'         => [
+            'first_name'            => 'Lizzy',
+            'last_name'             => 'Meow',
+            'gender'                => 'female',
+            'email'                 => 'helloasik+lizzy@gmail.com',
+            'password'              => 'asdasd',
+            'role'                  => 'member',
+            'dob'                   => '05-05-1996'
+        ]
+    ],
+    [
+        /*
+         * User 6: Member
+         */
+        'uid'          => 'b8c99ed5-0080-4be6-9ae6-d4f0649d6f8d',
+        'api_key'      => '0af3727893c64aceba06da06be84efdd',
+        'api_secret'   => 'z7bO6QF7Jv28SQz0sMBy01TetM0CVRzs1T7PM2ZFIKSzqXsrYbUU0AwFm8kgcHng',
+        'is_activated' => 1,
+        'data'         => [
+            'first_name'            => 'Kendra',
+            'last_name'             => 'mee',
+            'gender'                => 'female',
+            'email'                 => 'helloasik+kendra@gmail.com',
+            'password'              => 'asdasd',
+            'role'                  => 'member',
+            'dob'                   => '05-05-1992'
         ]
     ],
 ];

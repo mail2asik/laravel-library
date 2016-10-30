@@ -353,6 +353,12 @@ class UserRepository
             //Get user details
             $user = $this->getUserByUserUid($user_uid);
 
+
+            // Check if any books not returned yet
+            if ($user['no_of_books_borrowed'] > 0) {
+                throw new \Exception('You can not delete this user due to he/she not returned book(s) yet');
+            }
+
             // Delete user
             $user->delete();
 
@@ -468,15 +474,13 @@ class UserRepository
     /**
      * Check if member borrowed book already
      *
+     * @param User $user
      * @return boolean
      *
      * @throws \Exception
      */
-    public function isUserEligibleToBorrowBook()
+    public function isUserEligibleToBorrowBook($user)
     {
-        // Get user details
-        $user = helpers::getUser();
-
         if ((int)$user['max_books_eligible'] <= (int)$user['no_of_books_borrowed']) {
             return false;
         }

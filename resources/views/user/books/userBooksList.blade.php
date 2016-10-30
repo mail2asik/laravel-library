@@ -6,9 +6,11 @@
         <th tabindex="0" rowspan="1" colspan="1">Book Title</th>
         <th tabindex="0" rowspan="1" colspan="1">Author</th>
         <th tabindex="0" rowspan="1" colspan="1">ISBN</th>
-        <th tabindex="0" rowspan="1" colspan="1">Shelf Location</th>
+        <th tabindex="0" rowspan="1" colspan="1">Shelf</th>
         <th tabindex="0" rowspan="1" colspan="1">Taken At</th>
-        <th tabindex="0" rowspan="1" colspan="1">Expire At</th>
+        <th tabindex="0" rowspan="1" colspan="1">Ended At</th>
+        <th tabindex="0" rowspan="1" colspan="1">Returned At</th>
+        <th tabindex="0" rowspan="1" colspan="1">Fine</th>
         <th tabindex="0" rowspan="1" colspan="1">Status</th>
     </tr>
     </thead>
@@ -22,6 +24,20 @@
                 <td>{{ $userBook['shelf_location'] }}</td>
                 <td>{{ date('m/d/y', strtotime($userBook['started_at'])) }}</td>
                 <td>{{ date('m/d/y', strtotime($userBook['ended_at'])) }}</td>
+                <td>
+                    @if($userBook['returned_at'] != '0000-00-00 00:00:00')
+                        {{ date('m/d/y', strtotime($userBook['returned_at'])) }}
+                    @else
+                        -
+                    @endif
+                </td>
+                <td>
+                    @if($userBook['fine'] != '0')
+                        <span class="label label-danger">SGD {{ $userBook['fine'] }}</span>
+                    @else
+                        -
+                    @endif
+                </td>
                 <td>
                     @if($userBook['status'] == 'RETURNED')
                         <span class="label label-success">{{ $userBook['status'] }}</span>

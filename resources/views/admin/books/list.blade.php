@@ -20,12 +20,18 @@
                     <td>{{ $book['isbn'] }}</td>
                     <td>{{ $book['shelf_location'] }}</td>
                     <td>{{ $book['quantity'] }}</td>
-                    <td>{{ $book['no_of_books_loan'] }}</td>
+                    <td>
+                        <a href="{{ secure_url('admin/reports?book_uid='. $book['uid']) }}">
+                            <span class="label label-danger">
+                             {{ $book['no_of_books_loan'] }}
+                            </span>
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
             @else
                 <tr>
-                    <td colspan="7">No records found.</td>
+                    <td colspan="6">No records found.</td>
                 </tr>
             @endif
             </tbody>

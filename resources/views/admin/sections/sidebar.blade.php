@@ -27,6 +27,9 @@
             <li class="{{ Request::is( 'admin/books/create') ? 'active' : '' }}"><a href="{{ secure_url('admin/books/create') }}"><i class="fa fa-user-plus"></i><span>Add</span></a></li>
             <li class="{{ Request::is( 'admin/books') ? 'active' : '' }}"><a href="{{ session()->has('page.books')? session('page.books') : secure_url('admin/books') }}"><i class="fa fa-users"></i><span>List</span></a></li>
 
+            <li class="header">Reports</li>
+            <li class="{{ Request::is( 'admin/reports') ? 'active' : '' }}"><a href="{{ session()->has('page.reports')? session('page.reports') : secure_url('admin/reports') }}"><i class="fa fa-users"></i><span>List</span></a></li>
+
             <li class="header">Accounts</li>
             <li class="{{ Request::is( 'admin/change-profile') ? 'active' : '' }}"><a href="{{ secure_url('admin/change-profile') }}"><i class="fa fa-edit"></i><span>My Profile</span></a></li>
             <li class="{{ Request::is( 'admin/change-password') ? 'active' : '' }}"><a href="{{ secure_url('admin/change-password') }}"><i class="fa fa-key"></i><span>Change Password</span></a></li>

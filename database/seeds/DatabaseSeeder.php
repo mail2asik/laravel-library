@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         // These seeders should only be executed on non-prod env
         if (!(app()->environment('production', 'alpha', 'staging', 'testing'))) {
             $this->call('UserSeeder');
+            $this->call('BookSeeder');
         }
 
         Model::reguard();

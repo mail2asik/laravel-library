@@ -6,7 +6,7 @@
                 <th tabindex="0" rowspan="1" colspan="1">Book Title</th>
                 <th tabindex="0" rowspan="1" colspan="1">Author</th>
                 <th tabindex="0" rowspan="1" colspan="1">ISBN</th>
-                <th tabindex="0" rowspan="1" colspan="1">Shelf Location</th>
+                <th tabindex="0" rowspan="1" colspan="1">Shelf</th>
                 <th tabindex="0" rowspan="1" colspan="1"></th>
             </tr>
             </thead>

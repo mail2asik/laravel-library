@@ -58,7 +58,7 @@
                             <label for="exampleInputPassword1">Date of birth<sup class="error">*</sup></label>
                             <input type="text" class="form-control pull-right" name="dob" id="dob"
                                    placeholder="Date of bith"
-                                   value="{{ old('dob', $user['dob']) }}" readonly style="background-color:#fff;" />
+                                   value="{{ old('dob', $user['dob']) }}" style="background-color:#fff;" />
                             <div></div>
                         </div>
                     </div>

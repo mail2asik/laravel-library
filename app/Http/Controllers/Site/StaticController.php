@@ -33,6 +33,51 @@ class StaticController extends Controller
     }
 
     /**
+     * Services page
+     *
+     * @param $request
+     *
+     * @return View
+     */
+    public function services(Request $request)
+    {
+        return view('user.static.services',[
+            'page_title' => config('app.site_name'). ' - Services',
+            'page_name' => 'services'
+        ]);
+    }
+
+    /**
+     * Winners page
+     *
+     * @param $request
+     *
+     * @return View
+     */
+    public function winners(Request $request)
+    {
+        return view('user.static.winners',[
+            'page_title' => config('app.site_name'). ' - Winners',
+            'page_name' => 'winners'
+        ]);
+    }
+
+    /**
+     * Jobs page
+     *
+     * @param $request
+     *
+     * @return View
+     */
+    public function jobs(Request $request)
+    {
+        return view('user.static.jobs',[
+            'page_title' => config('app.site_name'). ' - Jobs',
+            'page_name' => 'jobs'
+        ]);
+    }
+
+    /**
      * Not found page
      *
      * @param $request

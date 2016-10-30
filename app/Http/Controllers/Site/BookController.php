@@ -130,7 +130,7 @@ class BookController extends Controller
 
             // Renew session to update "no_of_books_borrowed"
             // So that, our system will not allow user to borrow more than the eligible
-            $this->user->renewUserSessionByUserId($user['uid']);
+            // $this->user->renewUserSessionByUserId($user['uid']);
 
             return Redirect::to('books')->with('flash_message', [
                 'status'  => 'success',
@@ -164,7 +164,7 @@ class BookController extends Controller
 
             // Renew session to update "no_of_books_borrowed"
             // So that, our system will allow user to borrow if he/she has eligible
-            $this->user->renewUserSessionByUserId($user['uid']);
+            // $this->user->renewUserSessionByUserId($user['uid']);
 
             return Redirect::back()->with('flash_message', [
                 'status'  => 'success',
@@ -258,7 +258,6 @@ class BookController extends Controller
 
             return view('user/books/userBooksList', $userBooks);
         } catch (\Exception $e) {
-            dd($e);
             return Response::json(['error' => true]);
         }
     }
