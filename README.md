@@ -1,4 +1,4 @@
-Library management built with Laravel 5.1.*
+Library Management System built with Laravel 5.1.*
 
 ## Installation Instructions
 
