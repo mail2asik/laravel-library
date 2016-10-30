@@ -20,7 +20,7 @@ REDIS_PASSWORD=null
 REDIS_PORT=6379
 
 MAIL_DRIVER=mailgun
-MAIL_PRETEND=true
+MAIL_PRETEND=false
 
 # Mailgun domain and api-key
 MAILGUN_DOMAIN=
