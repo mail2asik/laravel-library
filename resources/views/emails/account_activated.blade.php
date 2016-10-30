@@ -17,7 +17,7 @@
                 <tbody>
                 <tr>
                     <td style="text-align:center;">
-                        <img src="{{ (getenv('APP_ENV') != 'local') ? getenv('SITE_URL') : 'http://pilot-project.amasik.com' }}/img/logo.png" />
+                        <img src="{{ (getenv('APP_ENV') != 'local') ? getenv('SITE_URL') : 'http://laravel-library.amasik.com' }}/img/logo.png" />
                     </td>
                 </tr>
                 <tr>
@@ -25,15 +25,9 @@
 
                         <p>Hi {{$first_name . ' ' . $last_name}},</p>
 
-                        <p><strong>Welcome to Pilot Project</strong></p>
+                        <p><strong>Welcome to {{ config('app.site_name') }}!</strong></p>
 
                         <p>Your account has been activated by admin. Please login using the following credential</p>
-
-                        @if(isset($partner_name))
-                        <p>
-                            <strong>Company Name</strong> : {{ $partner_name }}
-                        </p>
-                        @endif
 
                         <p>
                             <strong>Email</strong>   : {{ $email }} <br />
@@ -43,7 +37,7 @@
                         <p style="text-align: center;"><a href="{{ getenv('SITE_URL') }}" style="text-decoration:none;color: #FFF;background-color: #6fb0b7;padding:10px 20px;font-weight:bold;margin: 20px 10px 20px 0;text-align:center;cursor:pointer;display: inline-block;border-radius: 25px;">Login</a>
                         </p>
 
-                        <p>Copyright © {{date('Y')}} Pilot Project - All rights reserved.</p>
+                        <p>Copyright © {{date('Y')}} {{ config('app.site_name') }} - All rights reserved.</p>
                     </td>
                 </tr>
                 </tbody>

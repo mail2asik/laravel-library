@@ -17,7 +17,7 @@
                 <tbody>
                 <tr>
                     <td style="text-align:center;">
-                        <img src="{{ (getenv('APP_ENV') != 'local') ? getenv('SITE_URL') : 'http://pilot-project.amasik.com' }}/img/logo.png" />
+                        <img src="{{ (getenv('APP_ENV') != 'local') ? getenv('SITE_URL') : 'http://laravel-library.amasik.com' }}/img/logo.png" />
                     </td>
                 </tr>
                 <tr>
