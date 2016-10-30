@@ -9,6 +9,7 @@
                 <th tabindex="0" rowspan="1" colspan="1">Shelf</th>
                 <th tabindex="0" rowspan="1" colspan="1">Quantity</th>
                 <th tabindex="0" rowspan="1" colspan="1">Loan</th>
+                <th tabindex="0" rowspan="1" colspan="1">Balance</th>
             </tr>
             </thead>
             <tbody>
@@ -27,6 +28,7 @@
                             </span>
                         </a>
                     </td>
+                    <td> {{ $book['quantity'] - $book['no_of_books_loan'] }}</td>
                 </tr>
                 @endforeach
             @else
