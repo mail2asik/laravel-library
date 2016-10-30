@@ -11,7 +11,6 @@
 ##################################################################################
 
 APPKEY=${APPKEY}
-TRUSTEDPROXIES=${TRUSTEDPROXIES}
 
 TARGETDIR=${TARGETDIR}
 TARGETSTORAGE=${TARGETSTORAGE}
