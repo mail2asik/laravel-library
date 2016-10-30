@@ -188,7 +188,7 @@ class BookRepository
     public function getAllBooks($params)
     {
         try {
-            $books = $this->getModel();
+            $books = $this->getModel()->orderBy('created_at', 'desc');
 
             // Search by keywords
             if (!empty($params['search_by_keywords'])) {
@@ -229,7 +229,7 @@ class BookRepository
 
             $userBooks = MemberBook::select(['books.*', 'memberbooks.*', 'books.uid as book_uid', 'memberbooks.uid as memberbook_uid'])
                 ->join('books', 'books.id', '=', 'memberbooks.book_id')
-                ->where('memberbooks.user_id', $user['id']);
+                ->where('memberbooks.user_id', $user['id'])->orderBy('memberbooks.created_at', 'desc');
 
             // Search by keywords
             if (!empty($params['search_by_keywords'])) {

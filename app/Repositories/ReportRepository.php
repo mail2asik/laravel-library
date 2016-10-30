@@ -42,7 +42,8 @@ class ReportRepository
                 'memberbooks.uid as memberbook_uid'
             ])
                 ->join('books', 'memberbooks.book_id', '=', 'books.id')
-                ->join('users', 'memberbooks.user_id', '=', 'users.id');
+                ->join('users', 'memberbooks.user_id', '=', 'users.id')
+                ->orderBy('memberbooks.created_at', 'desc');
 
             // Search by keywords
             if (!empty($params['search_by_keywords'])) {

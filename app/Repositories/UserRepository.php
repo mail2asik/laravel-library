@@ -312,7 +312,8 @@ class UserRepository
                 ->select('users.*')
                 ->join('role_users', 'users.id', '=', 'role_users.user_id')
                 ->join('roles', 'role_users.role_id', '=', 'roles.id')
-                ->where('roles.slug', 'member');
+                ->where('roles.slug', 'member')
+                ->orderBy('users.created_at', 'desc');
 
             // Search by keywords
             if (!empty($params['search_by_keywords'])) {
